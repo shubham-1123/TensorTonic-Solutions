@@ -1,0 +1,14 @@
+import numpy as np
+
+def selu(x, lam=1.0507009873554804934193349852946, alpha=1.6732632423543772848170429916717):
+    """
+    Apply SELU activation element-wise.
+    Returns a list of floats rounded to 4 decimal places.
+    """
+    # Write code here
+    x = np.asarray(x)
+    result = np.empty_like(x, dtype = float)
+    positive = x > 0
+    result[positive] = lam * x[positive]
+    result[~positive] = lam * alpha * (np.exp(x[~positive]) - 1)
+    return result
