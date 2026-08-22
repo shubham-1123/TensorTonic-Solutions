@@ -13,9 +13,9 @@ def batch_norm_forward(x: list, gamma: list, beta: list, eps: float = 1e-5) -> n
     mu = np.mean(x, axis=axis, keepdims=True)
     variance = np.mean((x-mu)**2, axis=axis, keepdims=True)
 
-    reshape = (1, len(gamma)) + (1,) * (x.ndim - 2)
-    gamma = gamma.reshape(reshape)
-    beta = beta.reshape(reshape)
+    shape = (1, -1) + (1,) * (x.ndim - 2)
+    gamma = gamma.reshape(shape)
+    beta = beta.reshape(shape)
     
     x_hat = (x-mu)/ np.sqrt(variance + eps)
     y = gamma * x_hat + beta
